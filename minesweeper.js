@@ -33,9 +33,9 @@ function startGame () {
 // 2. Are all of the mines marked?
 function checkForWin () {
     for( var x = 0; x <board.cells.length; x++) {
-      if (.isMine === true || .isMarked === true){
+      if (isMine === true || isMarked === true){
         for(var y= 0; y < board.cells.length; y++) {
-          if (.hidden === false) {
+          if (hidden === false) {
             displayMessage;
           }
           else {
