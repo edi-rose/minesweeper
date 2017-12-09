@@ -31,43 +31,56 @@ function startGame () {
 //
 // 1. Are all of the cells that are NOT mines visible?
 // 2. Are all of the mines marked?
-
 // function checkForWin () {
-//   for (var i = 0; i < board.cells.length; i++) {
-//     if ((board.cells[i].isMine) && (!board.cells[i].isMarked)) {
-//       lib.displayMessage("Keep going!");
-//       return;
-//     } else if (board.cells[i].hidden && (!board.cells[i].isMine)) {
-//       lib.displayMessage("You're not done yet!");
-//       return;
-//     } else {
-//      lib.displayMessage('You win!')
+//
+//   var win = false;
+//
+//   for (var i = 0; i <board.cells.length; i++) {
+//
+//     if (board.cells[i].hidden === true){
+//       if ((board.cells[i].isMine === true) && (board.cells[i].isMarked === true)){
+//             set(win=true);
+//           }
 //     }
-//   }
+//      if ((board.cells[i].isMine)&&(board.cells[i].hidden=== false)) {
+//        set(win=true);
+//      }
+//      if (win=true) {
+//        lib.displayMessage('You win!');
+//      }
+//      else {
+//        return;
+//      }
 // }
-
-
+// }
 function checkForWin () {
-    for( var i = 0; i <board.cells.length; i++) {
-      if ((board.cells[i].isMine === true) && (!board.cells[i].isMarked === true)){
 
-        for (var i= 0; i < board.cells.length; i++) {
-          if (board.cells[i].hidden ===  false) {
-            lib.displayMessage('You win!');
-          }
+var markedMines = 0;
+ for(i = 0; i< board.cells.length; i++) {
 
-          else {
-            return;
-          }
-        }
-      }
-         if ((board.cells[i].isMine === false) && (!board.cells[i].hidden === false)){
-           lib.displayMessage('You win!');
-         }
-         else {
-           return;
-         }
-     }
+   var isMine = board.cells[i].isMine;
+   var isMarked = board.cells[i].isMarked;
+
+   if ((isMine === true) && (isMarked === true)) {
+     markedMines++;
+   }
+ }
+
+ var uncoveredSafe= 0;
+
+
+ for ( var i = 0; i <board.cells.length; i++) {
+
+   var isMine = board.cells[i].isMine;
+   var isHidden = board.cells[i].hidden;
+
+       if ((isMine === false) && (isHidden === false)){
+         uncoveredSafe++;
+  }
+ }
+ if ((markedMines === 3) || (uncoveredSafe===6)) {
+   lib.displayMessage('You win!');
+}
 }
 
   // You can use this function call to declare a winner (once you've
